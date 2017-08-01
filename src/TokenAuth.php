@@ -28,7 +28,7 @@ class TokenAuth {
     {
         $token = $request->getHeader('Authorization');
 
-        if ($this->isPublicUrl($request->getUri()->getPath())) {
+        if ($this->isPublicUrl($request->getUri()->getPath()) || $request->isOptions()) {
             return $next($request, $response);
         }
         if (!empty($token) && $this->authenticate($token[0])) {
